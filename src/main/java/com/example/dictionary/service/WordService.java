@@ -43,17 +43,14 @@ public class WordService {
         Language language = languageRepository.findByName(wordAddDto.getLanguage());
         newWord.setAddedBy(addedBy.get());
         newWord.setLanguage(language);
-        addedBy.get().getAddedWords().add(newWord);
         wordRepository.save(newWord);
-        userRepository.save(addedBy.get());
     }
 
     public List<WordView> getAllGermanWords() {
-        List<WordView> germanWords = wordRepository.findAllByLanguage_Name(LanguageNameEnum.GERMAN)
+        return wordRepository.findAllByLanguage_Name(LanguageNameEnum.GERMAN)
                 .stream()
                 .map(word -> modelMapper.map(word, WordView.class))
                 .toList();
-        return germanWords;
     }
 
     public List<WordView> getAllSpanishWords() {
