@@ -47,33 +47,27 @@ public class WordService {
     }
 
     public List<WordView> getAllGermanWords() {
-        return wordRepository.findAllByLanguage_Name(LanguageNameEnum.GERMAN)
-                .stream()
-                .map(word -> modelMapper.map(word, WordView.class))
-                .toList();
+        return getWordsByLanguage(LanguageNameEnum.GERMAN);
     }
 
     public List<WordView> getAllSpanishWords() {
-       return wordRepository.findAllByLanguage_Name(LanguageNameEnum.SPANISH)
-                .stream()
-                .map(word -> modelMapper.map(word,WordView.class))
-                .toList();
+       return getWordsByLanguage(LanguageNameEnum.SPANISH);
     }
 
     public List<WordView> getAllFrenchWords() {
-        return wordRepository.findAllByLanguage_Name(LanguageNameEnum.FRENCH)
-                .stream()
-                .map(word -> modelMapper.map(word, WordView.class))
-                .toList();
+        return getWordsByLanguage(LanguageNameEnum.FRENCH);
     }
 
     public List<WordView> getAllItalianWords() {
-        return wordRepository.findAllByLanguage_Name(LanguageNameEnum.ITALIAN)
+        return getWordsByLanguage(LanguageNameEnum.ITALIAN);
+    }
+
+    public List<WordView> getWordsByLanguage(LanguageNameEnum language) {
+        return wordRepository.findAllByLanguage_Name(language)
                 .stream()
                 .map(word -> modelMapper.map(word,WordView.class))
                 .toList();
     }
-
     public Long allWordsCount() {
         return wordRepository.count();
     }
